@@ -1,0 +1,11 @@
+{% extends "layout.html" %} 
+
+{% block content %}
+  {% for panel in panels %}
+    <div class="page">
+      <h2>{{ panel.title }}</h2>
+      <p class="url">{{ panel.url }}</p>
+      <output>Measuring</output>
+    </div>
+  {% endfor %}
+{% endblock %}
