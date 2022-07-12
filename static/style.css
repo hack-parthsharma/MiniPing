@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
+@import url("base.css");
+
+:root { 
+  --background: #ffffff;
+  --panels: #f8f8f8;
+  --text: #22222a;
+  --default-highlight: #eeeeee;
+  --url: #99999a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { 
+    --background: #11111a;
+    --panels: #22222a;
+    --default-highlight: #33333a;
+    --text: #ffffff;
+    --url: #99999a;
+  }
+} 
+
+@keyframes loading {
+  0%{ content: ".\00a0\00a0"; }
+  33% { content: "..\00a0"; }
+  67% { content: "..."; }
+  100% { content: "..."; }
+}
+
+
+body {
+  font-family: Rubik, monospace;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+header, section {
+  padding: 32px;
+}
+
+header {
+  background-color: var(--panels);
+  font-weight: 500;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+section {
+  background-color: var(--background);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-auto-rows: minmax(250px, auto);
+  grid-gap: 24px;
+}
+
+div.page {
+  --highlight: var(--default-highlight);
+
+  padding: 24px;
+  background-color: var(--panels);
+  border-top: 5px solid var(--highlight);
+  transition: border-top-color 0.5s;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+div.page.error {
+  --highlight: red;
+}
+
+h1:before {
+  content: "";
+  display: inline-block;
+  width: 3em;
+  height: 1em;
+  border-radius: 500px;
+  vertical-align: -10%;
+  background-color: var(--highlight);
+  background-image: linear-gradient(90deg, #4fed8d, #C4C52D, #fb5331);
+  margin-right: 0.75em;
+  transition: background-color 0.5s;
+}
+
+h2 {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+p.url {
+  font-family: IBM Plex Mono, monospace;
+  font-weight: 400;
+  color: var(--url);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+output {
+  font-family: IBM Plex Mono, monospace;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+output:before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  vertical-align: -10%;
+  background-color: var(--highlight);
+  margin-right: 0.75em;
+  transition: background-color 0.5s;
+}
+
+
+.loading output::after {
+  content: "";
+  animation: loading 3s steps(3) infinite;
+}
+
+
+
+
+@media (max-width: 500px) {
+  section {
+    grid-template-columns: 1fr;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+}
